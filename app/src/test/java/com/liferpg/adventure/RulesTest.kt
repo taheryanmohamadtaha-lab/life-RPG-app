@@ -89,8 +89,13 @@ class CompletionEngineTest {
     )
 
     @Test fun baseRewardWithoutBonus() {
-        val r = CompletionEngine.compute(input())
+        val r = CompletionEngine.compute(input(rules = XpRules(streakBonusEnabled = false)))
         assertEquals(25, r.xpAwarded); assertEquals(1, r.streak.streak)
+    }
+
+    @Test fun firstDayStreakBonusIsFivePercent() {
+        val r = CompletionEngine.compute(input())
+        assertEquals(5, r.streakBonusPercent); assertEquals(26, r.xpAwarded)
     }
 
     @Test fun xpRequestIsClampedToTwiceBase() {
