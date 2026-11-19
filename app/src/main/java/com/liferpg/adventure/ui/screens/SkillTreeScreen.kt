@@ -167,7 +167,7 @@ private fun SkillDetail(ui: GameUi, vm: GameViewModel, def: SkillDef) {
                 Spacer(Modifier.size(10.dp))
                 Column(Modifier.weight(1f)) {
                     Text(if (lang == "fa") def.fa else def.en, color = c.text, fontWeight = FontWeight.Bold, fontSize = 17.sp)
-                    Text((cat?.let { it.emoji + " " + it.name(lang) } ?: "") + " · " + tr("ردهٔ ${num(def.tier)}", "Tier ${def.tier}"), color = c.textDim, fontSize = 12.sp)
+                    Text((cat?.let { it.emoji + " " + (if (lang == "fa") it.fa else it.en) } ?: "") + " · " + tr("ردهٔ ${num(def.tier)}", "Tier ${def.tier}"), color = c.textDim, fontSize = 12.sp)
                 }
                 Tag(tr("رتبه ", "Rank ") + num(rank) + "/" + num(SkillDef.MAX_RANK), if (rank > 0) c.emerald else c.textDim)
             }

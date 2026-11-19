@@ -172,8 +172,8 @@ fun StatsScreen(ui: GameUi, onBack: () -> Unit) {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 SectionTitle(tr("پیشرفت مهارت‌ها", "Skill progression"))
                 for (cat in Catalog.categories) {
-                    val ranks = (1..3).sumOf { ui.ranks["${cat.id}_$it"] ?: 0 }
-                    Row(Modifier.fillMaxWidth()) { Text(cat.emoji + " " + cat.name(lang), color = c.text, fontSize = 13.sp, modifier = Modifier.weight(1f)); Text("${num(ranks)}/${num(9)}", color = c.textDim, fontSize = 12.sp) }
+                    val ranks = Catalog.skills.filter { it.categoryId == cat.id }.sumOf { ui.ranks[it.id] ?: 0 }
+                    Row(Modifier.fillMaxWidth()) { Text(cat.emoji + " " + (if (lang == "fa") cat.fa else cat.en), color = c.text, fontSize = 13.sp, modifier = Modifier.weight(1f)); Text("${num(ranks)}/${num(9)}", color = c.textDim, fontSize = 12.sp) }
                     XpBar(ranks / 9f, Modifier.fillMaxWidth(), height = 7.dp, colors = colorOf(cat.color).let { listOf(it.copy(alpha = 0.6f), it) })
                 }
             }
